@@ -1,0 +1,47 @@
+import React from 'react'
+import { Component } from 'react';
+import classes from './Layout.module.css'
+import MenuToggle from '../../Components/Navigation/MenuToggle/MenuToggle'
+import Drawer from '../../Components/Navigation/Drawer/Drawer'
+
+class Layout extends Component{
+
+    state={
+        menu:false
+    }
+
+    ToggleMenuHandler=()=>{
+        this.setState({
+            menu:!this.state.menu
+        })
+    }
+
+    menuCloseHandler =() =>{
+        this.setState({
+            menu:false
+        })
+    }
+
+    render(){
+        return(
+            <div className={classes.Layout}>
+                <Drawer
+                isOpen = {this.state.menu}
+                onClose={this.menuCloseHandler}
+                />
+
+                <MenuToggle
+                    onToggle={this.ToggleMenuHandler}
+                    isOpen = {this.state.menu}
+                />
+
+
+                <main>
+                {this.props.children}
+                </main>
+            </div>
+        )
+    }
+}
+
+export default Layout
